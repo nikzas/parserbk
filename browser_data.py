@@ -1,7 +1,5 @@
 from playwright.sync_api import Playwright, sync_playwright
 import pandas as pd
-import sqlite3 as sl
-
 
 class ParserAviator():
     def __init__(self):
@@ -23,11 +21,16 @@ class ParserAviator():
         return df
 
 if __name__ == "__main__":
-    x = 0
+    CNT = 0
     start = ParserAviator()
     global_massive = start.corr_text()
     while True:
         next_mass = start.corr_text()
+        index_global_massive = global_massive.loc[CNT, :2]  # Первые три числа в массиве
+        c = global_massive.compare(next_mass)
+        CNT += 1
+
+
         global_massive = pd.concat([global_massive, next_mass], ignore_index=True)
         print(global_massive)
 
