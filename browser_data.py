@@ -31,8 +31,9 @@ if __name__ == "__main__":
         res_n_m = next_mass.loc[CNT+1, :3]
         res_g_m = res_g_m[0]
 
-        result = res_g_m.compare(res_n_m)
 
+        result = res_g_m.compare(res_n_m)
+        x = res_g_m in result.other
 
         global_massive = pd.concat([global_massive, next_mass], ignore_index=True)
         print(global_massive)
