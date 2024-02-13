@@ -26,9 +26,12 @@ if __name__ == "__main__":
     global_massive = start.corr_text()
     while True:
         next_mass = start.corr_text()
-        index_global_massive = global_massive.loc[CNT, :2]  # Первые три числа в массиве
-        c = global_massive.compare(next_mass)
-        CNT += 1
+        #index_global_massive = global_massive.loc[CNT, :3]  # Первые три числа в массиве
+        res_g_m = global_massive.loc[CNT, :3]
+        res_n_m = next_mass.loc[CNT+1, :3]
+        res_g_m = res_g_m[0]
+
+        result = res_g_m.compare(res_n_m)
 
 
         global_massive = pd.concat([global_massive, next_mass], ignore_index=True)
