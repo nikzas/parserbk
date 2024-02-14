@@ -18,7 +18,7 @@ class ParserAviator():
 
     def corr_text(self):
         massive = [float(i.replace('\xa0', '')) for i in self.run().split(sep='x') if i != '']  # Здесь  уже float
-        df = pd.DataFrame(massive).T # Текст повернут в горизонт
+        df = pd.DataFrame({'A': massive})
         return df
 
 if __name__ == "__main__":
@@ -26,20 +26,14 @@ if __name__ == "__main__":
     start = ParserAviator()
     global_massive = start.corr_text()
     while True:
-        next_mass = start.corr_text()
-        first_cnt = global_massive.loc[CNT, :0]  # Первое число в глобальном массиве
-        res_n_m = next_mass.loc[CNT, :5]
-
-        if first_cnt.values in res_n_m.values == True:      # Если первое число глобального массива присутсвует то Ок
-
-        index = (res_n_m == first_cnt[0]).idxmax()
-
-        result = first_cnt.compare(res_n_m)
-
-
+        global_massive['B'] = start.corr_text()               #.loc[CNT, :5]
+        #first_cnt = global_massive.loc[CNT, :0]  # Первое число в глобальном массиве
+        #res_n_m = next_mass.loc[CNT, :5]
+        #if first_cnt.values in res_n_m.values:      # Если первое число глобального массива присутсвует то Ок
+            #index = res_n_m.tolist().index(first_cnt.values)
+        #result = first_cnt.compare(res_n_m)
         #find_index = result.other[result.other == res_cnt].index.tolist()
-
-        global_massive = pd.concat([global_massive, next_mass.loc[CNT, 0:find_index[[0]]]], ignore_index=True)
+        #global_massive = pd.concat([global_massive, next_mass.loc[CNT, :index]], ignore_index=True)
 
         print(global_massive)
 
