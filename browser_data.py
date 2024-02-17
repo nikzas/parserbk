@@ -1,5 +1,6 @@
 from playwright.sync_api import sync_playwright
 import pandas as pd
+from datetime import datetime, timedelta
 
 
 class ParserAviator():
@@ -30,9 +31,16 @@ class ParserAviator():
     def last_edit_text(self, global_massive, next_mass):
         first_cnt = global_massive[0:3].stack()
         index_find = next_mass[next_mass.isin(first_cnt)].index
-        global_massive = pd.concat([next_mass[:index_find.values[0]], global_massive])
+        global_massive = pd.concat([next_mass[:index_find.values[0]], global_massive]).reset_index(drop=True)
         print(global_massive)
         return global_massive
 
+    start_date = datetime(2024, 2, 17, 23, 59)
+
+    def start_time(self):
+        global start_date
+        current_date = start_date
+        start_date += timedelta(days=1)
+        return current_date
 
 
